@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flexbox</title>
+    <link rel="stylesheet" href="static/phonebook.css" />
+  </head>
+
+  <body>
+    <!-- Контейнер поиска-->
+    <div class="input">
+      <form id="searchForm" action="" method="get" enctype="multipart/form-data">
+      <div class="row1">
+        {% csrf_token %}
+        {{search}}
+      </div>
+      </form>
+      <div class="row2">
+        <button form="searchForm" name="search">
+          Поиск
+        </button>
+
+        <button type="reset" onclick="mainReset()" class="mainButton">
+          Сброс
+        </button>
+        <button onclick="modalSwitch()" type="submit" class="mainButton">Добавить</button>
+      </div>
+
+    </div>
+
+    <!-- Пагинация -->
+    <div class="pagination">
+        {% if searched_data.paginator.num_pages > 1 %}
+        <a href="?page=1{% for key, value in request.GET.items%}{%if key != 'page' and value%}&{{key}}={{value}}
+        {% endif %}{%  endfor %}">&laquo;1&raquo;</a>
+          {% if  searched_data.has_previous %}
+          <a href="?page={{searched_data.previous_page_number}}{% for key, value in request.GET.items%}
+          {%if key != 'page' and value%}&{{key}}={{value}}{% endif %}{%  endfor %}">Предыдущая</a>
+          {% endif %}
+        <a href="?page={{searched_data.number}}{% for key, value in request.GET.items%}
+          {%if key != 'page' and value%}&{{key}}={{value}}{% endif %}{%  endfor %}">{{searched_data.number}}</a>
+          {% if  searched_data.has_next%}
+          <a href="?page={{searched_data.next_page_number}}{% for key, value in request.GET.items%}
+          {%if key != 'page' and value%}&{{key}}={{value}}{%endif%}{%endfor%}">Следующая</a>
+          {% endif %}
+        <a href="?page={{searched_data.paginator.num_pages}}{% for key, value in request.GET.items%}
+        {%if key != 'page' and value%}&{{key}}={{value}}{%endif%}{%endfor%}">&laquo{{searched_data.paginator.num_pages}}&raquo;</a>
+        {% endif %}
+    </div>
+
+    <!-- Таблица-->
+
+    <div class="main">
+      <div id="contacts">
+      {% for contact in searched_data %}
+        <div class="ser_contacts">
+            {% if contact.photo != '' %}
+            <img src="{{contact.photo.url}}" class="img" width="300" height="300">
+            {% else %}
+            <p class="p_img">Фото отсутствует</p>
+            {% endif %}
+          <div class="ser_contacts_content">
+            <div class="ser_contacts_content{{contact.id}}">
+                <p>Ф.И.О: {{contact.name}}</p>
+                <p>Номер: {{contact.number}}</p>
+                <p>Отдел: {{contact.subdivision}}</p>
+                <p>Должность: {{contact.jobtitle}}</p>
+                <p>Почта: {{contact.mail}}<p>
+                <form id="delContForm" action="" method="post" enctype="multipart/form-data" style="display: none">
+                {% csrf_token %}
+                <input type="text" name="delete_contact" value="{{contact.id}}">
+                </form>
+                <button form="delContForm" id="deleteContactBut">Удалить</button>
+                <button id="changeContact" name="change_contact" onclick="contactModalOpen({{contact.id}})">Изменить</button>
+            </div>
+          </div>
+
+          <!--Модальное окно для каждого котакта-->
+          <div id="{{contact.id}}" class="modalChange" style="display: none">
+          <form  class = 'modalChangeForm' action="" method="post" enctype="multipart/form-data"
+                 id="contactModalForm" novalidate>
+                                  <!--без novalidate не будет запси в бд, если не выбрано новое фото-->
+            {% csrf_token %}
+            {{change_contact}}
+            <input type="text" name="changeContactId" value="{{contact.id}}" style="display: none">
+            <button onclick="contactModalClose({{contact.id}})" id="ContactChangeModalButton" name="ContactChangeModalButton">Изменить</button>
+          </form>
+          <button onclick="contactModalClose({{contact.id}})" class="cancelChange">Отмена</button>
+        </div>
+    </div>
+      {% endfor%}
+      </div>
+      <div id="subdivision_filter">
+        <a href="/?searchName=&searchNumber=&searchSubdivision=Управление&searchJobTitle=&searchEmail=&search=">
+          Управление</a>
+        <a href="/?searchName=&searchNumber=&searchSubdivision=Бухгалтерия&searchJobTitle=&searchEmail=&search=">
+          Бухгалтерия</a>
+        <a href="/?searchName=&searchNumber=&searchSubdivision=Отдел продаж&searchJobTitle=&searchEmail=&search=">
+          Отдел продаж</a>
+        <a href="/?searchName=&searchNumber=&searchSubdivision=Отдел системного администрирования&searchJobTitle=&
+        searchEmail=&search=">Отдел системного администрирования</a>
+      </div>
+    </div>
+
+    <div class="pagination">
+        {% if searched_data.paginator.num_pages > 1 %}
+        <a href="?page=1{% for key, value in request.GET.items%}{%if key != 'page' and value%}&{{key}}={{value}}
+        {% endif %}{%  endfor %}">&laquo;1&raquo;</a>
+          {% if  searched_data.has_previous %}
+          <a href="?page={{searched_data.previous_page_number}}{% for key, value in request.GET.items%}
+          {%if key != 'page' and value%}&{{key}}={{value}}{% endif %}{%  endfor %}">Предыдущая</a>
+          {% endif %}
+        <a href="?page={{searched_data.number}}{% for key, value in request.GET.items%}
+          {%if key != 'page' and value%}&{{key}}={{value}}{% endif %}{%  endfor %}">{{searched_data.number}}</a>
+          {% if  searched_data.has_next%}
+          <a href="?page={{searched_data.next_page_number}}{% for key, value in request.GET.items%}
+          {%if key != 'page' and value%}&{{key}}={{value}}{%endif%}{%endfor%}">Следующая</a>
+          {% endif %}
+        <a href="?page={{searched_data.paginator.num_pages}}{% for key, value in request.GET.items%}
+        {%if key != 'page' and value%}&{{key}}={{value}}{%endif%}{%endfor%}">&laquo{{searched_data.paginator.num_pages}}&raquo;</a>
+        {% endif %}
+    </div>
+
+    <!-- Модальное окно для добавления контактов -->
+
+    <div id="modal" style="display: none">
+      <form action="" method="post" enctype="multipart/form-data" id="modalForm">
+        {% csrf_token %}
+        {{ form }}
+        <button onclick="modalSwitch()" id="modalButton" name="add">Добавить</button>
+      </form>
+      <button type="reset" onclick="modalReset()" id="modalReset">Сброc</button>
+      <button onclick="modalSwitch()" id="modalCancel">Отмена</button>
+    </div>
+    <script src="static/phonebook.js"></script>
+  </body>
+</html>

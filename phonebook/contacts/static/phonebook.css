@@ -1,0 +1,179 @@
+body {
+  background-color: rgb(0, 0, 0);
+}
+
+/* форма поиска */
+
+input {
+  height: 20px;
+}
+.input {
+  border: 2px solid rgb(252, 101, 0);
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.row1 {
+  display: flex;
+  justify-content: space-around;
+}
+
+.row2 {
+  display: flex;
+  justify-content: space-around;
+  width: 60%;
+}
+
+.mainButton {
+  height: 30px;
+  width: 80px;
+}
+.main {
+  margin-top: 40px;
+  display: flex;
+}
+
+/* формы с выводом поиска */
+
+.pagination{
+    margin-top: 3%;
+    margin-bottom: 3%;
+    font-size: 20px;
+}
+
+#contacts {
+    color: white;
+    width: 80%;
+}
+
+#contacts .ser_contacts{
+  border: 2px solid rgb(252, 101, 0);
+  margin-bottom: 5%;
+  display: flex;
+  flex-direction: row;
+}
+
+
+.ser_contacts_content {
+  margin-left: 10%;
+  top: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.ser_contacts_content p{
+  margin-bottom: 0%;
+}
+
+#changeContact{
+  margin-top: 6%;
+}
+/* Фильтр по подразделению*/
+
+#subdivision_filter {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 300px;
+  width: 20%;
+  margin-left: 4%;
+  color: white;
+  border: 2px solid rgb(252, 101, 0);
+}
+
+/* модальное окно */
+
+#modal {
+  display: none;
+  z-index: 100;
+  flex-direction: column;
+  position: fixed;
+  bottom: 10%;
+  top: 10%;
+  left: 12%;
+  width: 35%;
+  height: 65%;
+  margin-bottom: 90%;
+  margin-left: 30%;
+  margin-right: 10%;
+  background-color: black;
+  border: 4px solid orange;
+}
+
+#modalForm{
+  margin-top: 0%;
+}
+
+.modalInput {
+  height: 40px;
+  width: 65%;
+  margin-left: 5%;
+  margin-right: 25%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+
+.modalImgInput{
+  height: 40px;
+  width: 65%;
+  margin-left: 5%;
+  margin-right: 25%;
+  margin-top: 0%;
+  margin-bottom: 0%;
+}
+
+#modalButton {
+  width: 150px;
+  height: 30px;
+  margin-left: 5%;
+  margin-right: 25%;
+  background-color: orange;
+  color: white;
+}
+
+#modalReset,
+#modalCancel {
+  height: 30px;
+  width: 150px;
+  margin-left: 5%;
+  margin-right: 25%;
+  margin-top: 10px;
+  color: white;
+  background-color: orange;
+}
+
+/* Модальное окно для изменения контактов*/
+.modalChange{
+  display: none;
+  z-index: 100;
+  flex-direction: column;
+  position: fixed;
+  bottom: 10%;
+  top: 10%;
+  left: 12%;
+  width: 35%;
+  height: 65%;
+  margin-bottom: 90%;
+  margin-left: 30%;
+  margin-right: 10%;
+  background-color: black;
+  border: 4px solid orange;
+}
+
+.modalChangeForm div{
+  margin-top: 5%;
+}
+
+.modalChangeForm button{
+  height: 10%;
+  width: 40%;
+  margin-top: 8%;
+  margin-bottom: 8%;
+}
+
+.cancelChange {
+  height: 8%;
+  width: 40%;
+}
