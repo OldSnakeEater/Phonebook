@@ -166,6 +166,11 @@ input {
   margin-top: 5%;
 }
 
+form#contactModalForm.modalChangeForm div label{
+  display: inline-block;
+  width: 100px;
+}
+
 .modalChangeForm button{
   height: 10%;
   width: 40%;
