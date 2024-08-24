@@ -30,11 +30,11 @@
 
     </div>
 
-    <!-- Пагинация -->
+    <!-- Пагинация top-->
     <div class="pagination">
         {% if searched_data.paginator.num_pages > 1 %}
         <a href="?page=1{% for key, value in request.GET.items%}{%if key != 'page' and value%}&{{key}}={{value}}
-        {% endif %}{%  endfor %}">&laquo;1&raquo;</a>
+        {% endif %}{%  endfor %}">&laquo;Первая страница&raquo;</a>
           {% if  searched_data.has_previous %}
           <a href="?page={{searched_data.previous_page_number}}{% for key, value in request.GET.items%}
           {%if key != 'page' and value%}&{{key}}={{value}}{% endif %}{%  endfor %}">Предыдущая</a>
@@ -46,7 +46,7 @@
           {%if key != 'page' and value%}&{{key}}={{value}}{%endif%}{%endfor%}">Следующая</a>
           {% endif %}
         <a href="?page={{searched_data.paginator.num_pages}}{% for key, value in request.GET.items%}
-        {%if key != 'page' and value%}&{{key}}={{value}}{%endif%}{%endfor%}">&laquo{{searched_data.paginator.num_pages}}&raquo;</a>
+        {%if key != 'page' and value%}&{{key}}={{value}}{%endif%}{%endfor%}">&laquoПоследняя страница: {{searched_data.paginator.num_pages}}&raquo;</a>
         {% endif %}
     </div>
 
@@ -104,10 +104,12 @@
       </div>
     </div>
 
+<!-- Пагинация bottom-->
+
     <div class="pagination">
         {% if searched_data.paginator.num_pages > 1 %}
         <a href="?page=1{% for key, value in request.GET.items%}{%if key != 'page' and value%}&{{key}}={{value}}
-        {% endif %}{%  endfor %}">&laquo;1&raquo;</a>
+        {% endif %}{%  endfor %}">&laquo;Первая страница&raquo;</a>
           {% if  searched_data.has_previous %}
           <a href="?page={{searched_data.previous_page_number}}{% for key, value in request.GET.items%}
           {%if key != 'page' and value%}&{{key}}={{value}}{% endif %}{%  endfor %}">Предыдущая</a>
@@ -119,7 +121,7 @@
           {%if key != 'page' and value%}&{{key}}={{value}}{%endif%}{%endfor%}">Следующая</a>
           {% endif %}
         <a href="?page={{searched_data.paginator.num_pages}}{% for key, value in request.GET.items%}
-        {%if key != 'page' and value%}&{{key}}={{value}}{%endif%}{%endfor%}">&laquo{{searched_data.paginator.num_pages}}&raquo;</a>
+        {%if key != 'page' and value%}&{{key}}={{value}}{%endif%}{%endfor%}">&laquoПоследняя страница: {{searched_data.paginator.num_pages}}&raquo;</a>
         {% endif %}
     </div>
 

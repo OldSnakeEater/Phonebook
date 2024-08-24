@@ -1,3 +1,4 @@
+//свитч отображения окна добавления контактов
 function modalSwitch() {
   let modal = document.getElementById("modal");
   if (modal.style.display == "none") {
@@ -7,6 +8,7 @@ function modalSwitch() {
   }
 }
 
+//сброс значений input'ов в окне добавления новых контактов
 function modalReset() {
   let inputs = document.getElementsByClassName("modalInput");
   for (let value of inputs) {
@@ -14,7 +16,7 @@ function modalReset() {
   }
 }
 
-
+//сброс значений input'ов поиска
 function mainReset() {
   let inputs = document.getElementsByClassName("mainInput");
   for (let value of inputs) {
@@ -22,6 +24,7 @@ function mainReset() {
   }
 }
 
+//Добавление в окно именения контакта уже внесенных в бд данных
 function contactModalOpen(id) {
   let contactModal = document.getElementById(id);
   if (contactModal.style.display == "none") {
@@ -38,6 +41,7 @@ function contactModalOpen(id) {
   modalInput[5].value = searchedContact[0].children[4].innerHTML.slice(7, (searchedContact[0].children[4].innerHTML.length));
 }
 
+//свитч отображения окна изменения контактов
 function contactModalClose(id) {
   let contactModal = document.getElementById(id);
   contactModal.style.display = "none";
